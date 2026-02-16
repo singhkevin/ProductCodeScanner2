@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  background-color: #020617;
+  /* slate-950 */
+  color: white;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+#reader {
+  border: none !important;
+  border-radius: 1.5rem !important;
+  overflow: hidden !important;
+}
+
+#reader__scan_region {
+  background: transparent !important;
+}
+
+#reader__dashboard {
+  background: transparent !important;
+  padding: 1rem !important;
+  color: white !important;
+}
+
+#reader__dashboard button {
+  background-color: #2563eb !important;
+  /* blue-600 */
+  color: white !important;
+  padding: 0.5rem 1rem !important;
+  border-radius: 0.5rem !important;
+  border: none !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
+  margin: 0.5rem !important;
+}
+
+#reader__camera_selection {
+  background-color: #1e293b !important;
+  /* slate-800 */
+  color: white !important;
+  padding: 0.5rem !important;
+  border-radius: 0.5rem !important;
+  border: 1px solid #334155 !important;
+}

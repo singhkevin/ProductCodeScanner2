@@ -1,0 +1,79 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-color: #000000;
+  --fg-color: #ffffff;
+  --accent-blue: #3b82f6;
+  --accent-green: #22c55e;
+  --accent-yellow: #facc15;
+  --accent-red: #ef4444;
+  --brutal-border: 4px solid #000000;
+  --brutal-shadow: 8px 8px 0px 0px #000000;
+  --brutal-shadow-sm: 4px 4px 0px 0px #000000;
+
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  line-height: 1.5;
+  font-weight: 500;
+
+  color-scheme: dark;
+  color: var(--fg-color);
+  background-color: #111111;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@layer components {
+  .brutal-card {
+    @apply bg-white text-black border-[4px] border-black shadow-[8px_8px_0px_0px_rgba(0, 0, 0, 1)] transition-all;
+  }
+
+  .brutal-card-dark {
+    @apply bg-[#1e293b] text-white border-[4px] border-black shadow-[8px_8px_0px_0px_rgba(30, 41, 59, 0.5)] transition-all;
+  }
+
+  .brutal-btn {
+    @apply border-[4px] border-black shadow-[4px_4px_0px_0px_rgba(0, 0, 0, 1)] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] active:translate-x-[4px] active:translate-y-[4px] transition-all font-black uppercase tracking-tighter disabled:opacity-50 disabled:shadow-none;
+  }
+
+  .brutal-btn-blue {
+    @apply brutal-btn bg-[#3b82f6] text-white;
+  }
+
+  .brutal-btn-green {
+    @apply brutal-btn bg-[#22c55e] text-black;
+  }
+
+  .brutal-btn-yellow {
+    @apply brutal-btn bg-[#facc15] text-black;
+  }
+
+  .brutal-btn-red {
+    @apply brutal-btn bg-[#ef4444] text-white;
+  }
+
+  .brutal-input {
+    @apply border-[4px] border-black bg-white text-black px-4 py-2 focus:outline-none focus:ring-4 focus:ring-black/10 transition-all font-bold;
+  }
+
+  .brutal-badge {
+    @apply border-2 border-black px-3 py-1 text-[10px] font-black uppercase tracking-widest;
+  }
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background-color: #111111;
+  background-image: radial-gradient(#222 10%, transparent 10%);
+  background-size: 20px 20px;
+}
+
+#root {
+  width: 100%;
+}
