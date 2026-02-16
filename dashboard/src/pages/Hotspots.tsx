@@ -99,7 +99,7 @@ export default function HotspotsMap() {
     const [hotspots, setHotspots] = useState<any[]>([]);
     const [stats, setStats] = useState<any>(null);
     const [selectedSpot, setSelectedSpot] = useState<any>(null);
-    const [map, setMap] = useState<any>(null);
+    const [, setMap] = useState<any>(null);
 
     const onLoad = useCallback(function callback(mapInstance: any) {
         setMap(mapInstance);
