@@ -10,7 +10,7 @@ When setting up your application in the Hostinger Panel, use these values:
 | :--- | :--- |
 | **Application Root** | `/public_html` (or your chosen project folder) |
 | **Application URL** | `yourdomain.com` |
-| **Application Startup File** | `backend/dist/index.js` |
+| **Application Startup File** | `backend/index.js` |
 | **Environment** | `Production` |
 
 > [!IMPORTANT]
