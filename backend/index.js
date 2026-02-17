@@ -3,8 +3,8 @@ const fs = require('fs');
 
 console.log('🚀 Starting Backend Bridge...');
 
-// Try to load .env from root if not already loaded (useful for Hostinger environment)
-const rootEnv = path.resolve(__dirname, '../.env');
+// Try to load .env from current directory (Hostinger root)
+const rootEnv = path.resolve(__dirname, '.env');
 if (fs.existsSync(rootEnv)) {
     console.log('📝 Loading environment from:', rootEnv);
     require('dotenv').config({ path: rootEnv });

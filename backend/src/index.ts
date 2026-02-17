@@ -4,10 +4,9 @@ import dotenv from 'dotenv';
 // Search for .env in multiple locations
 const envPaths = [
     path.resolve(process.cwd(), '.env'),             // Current directory
-    path.resolve(process.cwd(), '../.env'),          // Parent of backend
     path.resolve(__dirname, '.env'),                 // Next to this file
-    path.resolve(__dirname, '../.env'),              // One level up
-    path.resolve(__dirname, '../../.env'),           // Two levels up (root if in backend/dist)
+    path.resolve(__dirname, '../.env'),              // Parent of src (backend root)
+    path.resolve(__dirname, '../../.env'),           // Two levels up
 ];
 
 envPaths.forEach(envPath => {
@@ -41,7 +40,7 @@ app.use('/api/products', productRoutes);
 app.use('/api/scans', scanRoutes);
 app.use('/api/stats', statsRoutes);
 
-const ROOT = path.join(__dirname, '../..');
+const ROOT = path.join(__dirname, '..');
 
 app.use('/verify', express.static(path.join(ROOT, 'public-verifier/dist')));
 app.use(express.static(path.join(ROOT, 'dashboard/dist')));
