@@ -1,17 +1,9 @@
 import path from 'path';
 import dotenv from 'dotenv';
 
-// Search for .env in multiple locations
-const envPaths = [
-    path.resolve(process.cwd(), '.env'),             // Current directory
-    path.resolve(__dirname, '.env'),                 // Next to this file
-    path.resolve(__dirname, '../.env'),              // Parent of src (backend root)
-    path.resolve(__dirname, '../../.env'),           // Two levels up
-];
 
-envPaths.forEach(envPath => {
-    dotenv.config({ path: envPath, override: false });
-});
+
+dotenv.config();
 
 import express from 'express';
 import cors from 'cors';
