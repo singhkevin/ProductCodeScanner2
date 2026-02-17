@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const rootEnvPath = path.resolve(__dirname, '..', '.env');
+const rootEnvPath = path.resolve(__dirname, '.env');
 const dashboardEnvPath = path.resolve(__dirname, 'dashboard', '.env');
 const verifierEnvPath = path.resolve(__dirname, 'public-verifier', '.env');
 
@@ -20,14 +20,19 @@ if (fs.existsSync(rootEnvPath)) {
     viteContent = viteLines.join('\n');
 } else {
     console.log('⚠️  .env file not found. Falling back to system environment variables...');
+
+    // DEBUG: Log all available keys (but not values)
+    const allKeys = Object.keys(process.env);
+    console.log('🔍 Available environment keys:', allKeys.join(', '));
+
     // Collect all process.env variables starting with VITE_
-    const viteVars = Object.keys(process.env)
+    const viteVars = allKeys
         .filter(key => key.startsWith('VITE_'))
-        .map(key => `${key}=${process.env[key]}`);
+        .map(key => `${key}="${process.env[key]}"`); // wrap in quotes for .env format
 
     if (viteVars.length > 0) {
         viteContent = viteVars.join('\n');
-        console.log(`✅ Collected ${viteVars.length} VITE_ variables from system env.`);
+        console.log(`✅ Collected ${viteVars.length} VITE_ variables from system env:`, viteVars.map(v => v.split('=')[0]).join(', '));
     } else {
         console.warn('⚠️  No VITE_ variables found in system environment.');
     }
