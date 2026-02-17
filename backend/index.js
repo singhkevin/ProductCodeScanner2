@@ -9,8 +9,14 @@ if (fs.existsSync(rootEnv)) {
     console.log('📝 Loading environment from:', rootEnv);
     require('dotenv').config({ path: rootEnv });
 } else {
-    console.warn('⚠️ Root .env not found at:', rootEnv);
+    console.warn('⚠️ Root .env file not found at:', rootEnv);
 }
+
+// Diagnostics
+console.log('📡 Checking Environment Variables:');
+console.log('- DATABASE_URL:', process.env.DATABASE_URL ? '✅ PRESENT' : '❌ MISSING');
+console.log('- JWT_SECRET:', process.env.JWT_SECRET ? '✅ PRESENT' : '❌ MISSING');
+console.log('- PORT:', process.env.PORT || 'Defaulting to 5000');
 
 const entryPoint = path.join(__dirname, 'dist/index.js');
 
