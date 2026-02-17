@@ -1,29 +1,44 @@
 const path = require('path');
 const fs = require('fs');
 
-console.log('🚀 Starting Backend Bridge...');
+// Enhanced Logging for Hostinger (Writes to a file so you can see it in File Manager)
+const logLines = [];
+function smartLog(message) {
+    console.log(message);
+    logLines.push(message);
+}
 
-// Try to load .env from current directory (Hostinger root)
-const rootEnv = path.resolve(__dirname, '.env');
+smartLog('🚀 Starting Backend Bridge...');
+
 const parentEnv = path.resolve(__dirname, '..', '.env');
+const localEnv = path.resolve(__dirname, '.env');
 
-if (fs.existsSync(rootEnv)) {
-    console.log('📝 Loading environment from:', rootEnv);
-    require('dotenv').config({ path: rootEnv });
-} else if (fs.existsSync(parentEnv)) {
-    console.log('📝 Loading environment from parent:', parentEnv);
+if (fs.existsSync(parentEnv)) {
+    smartLog('📝 Loading environment from Root (.env): ' + parentEnv);
     require('dotenv').config({ path: parentEnv });
+} else if (fs.existsSync(localEnv)) {
+    smartLog('📝 Loading environment from Local (.env): ' + localEnv);
+    require('dotenv').config({ path: localEnv });
 } else {
-    console.warn('⚠️ No .env file found in current or parent directory.');
+    smartLog('⚠️ No .env file found in Root or Local directory.');
 }
 
 // Diagnostics
-console.log('📡 Checking Environment Variables:');
-console.log('- DATABASE_URL:', process.env.DATABASE_URL ? '✅ PRESENT' : '❌ MISSING');
-console.log('- JWT_SECRET:', process.env.JWT_SECRET ? '✅ PRESENT' : '❌ MISSING');
-console.log('- PORT:', process.env.PORT || 'Defaulting to 5000');
+smartLog('📡 Checking Environment Variables:');
+smartLog('- DATABASE_URL: ' + (process.env.DATABASE_URL ? '✅ PRESENT' : '❌ MISSING'));
+smartLog('- JWT_SECRET: ' + (process.env.JWT_SECRET ? '✅ PRESENT' : '❌ MISSING'));
+smartLog('- PORT: ' + (process.env.PORT || 'Defaulting to 5000'));
 
-console.log('🔍 Available Env Keys:', Object.keys(process.env).filter(k => !k.startsWith('npm_') && !k.startsWith('NODE_')).join(', '));
+smartLog('🔍 Available Env Keys: ' + Object.keys(process.env).filter(k => !k.startsWith('npm_') && !k.startsWith('NODE_')).join(', '));
+
+// Write to a file for easy access in Hostinger File Manager
+const logFilePath = path.join(__dirname, 'startup-debug.log');
+try {
+    fs.writeFileSync(logFilePath, logLines.join('\n') + '\n--- ' + new Date().toISOString() + ' ---\n');
+    smartLog('💾 Startup logs saved to: ' + logFilePath);
+} catch (err) {
+    console.error('❌ Failed to write log file:', err.message);
+}
 
 const entryPoint = path.join(__dirname, 'dist/index.js');
 

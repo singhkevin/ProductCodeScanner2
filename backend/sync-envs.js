@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const rootEnvPath = path.resolve(__dirname, '.env');
+const rootEnvPath = path.resolve(__dirname, '..', '.env');
 const dashboardEnvPath = path.resolve(__dirname, 'dashboard', '.env');
 const verifierEnvPath = path.resolve(__dirname, 'public-verifier', '.env');
 
