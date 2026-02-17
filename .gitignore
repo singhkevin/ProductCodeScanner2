@@ -7,7 +7,6 @@ node_modules/
 coverage/
 
 # Build
-dist/
 build/
 .next/
 out/

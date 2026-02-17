@@ -24,10 +24,10 @@ app.use('/api/stats', statsRoutes);
 // --- STATIC FRONTEND SERVING ---
 
 // 1. Serve Public Verifier at /verify
-app.use('/verify', express.static(path.join(__dirname, '../../../public-verifier/dist')));
+app.use('/verify', express.static(path.join(__dirname, '../../public-verifier/dist')));
 
 // 2. Serve Dashboard at the Root (/)
-app.use(express.static(path.join(__dirname, '../../../dashboard/dist')));
+app.use(express.static(path.join(__dirname, '../../dashboard/dist')));
 
 app.get('/health', (req: Request, res: Response) => {
     res.json({ status: 'OK', message: 'Product Code Scanner API is running' });
@@ -35,11 +35,11 @@ app.get('/health', (req: Request, res: Response) => {
 
 // 3. Catch-all for React Routers
 app.get('/verify/*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../../../public-verifier/dist/index.html'));
+    res.sendFile(path.join(__dirname, '../../public-verifier/dist/index.html'));
 });
 
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../../../dashboard/dist/index.html'));
+    res.sendFile(path.join(__dirname, '../../dashboard/dist/index.html'));
 });
 
 app.listen(PORT, () => {
