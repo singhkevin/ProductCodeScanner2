@@ -12,6 +12,12 @@ smartLog('🚀 Starting Backend Bridge...');
 
 const parentEnv = path.resolve(__dirname, '..', '.env');
 const localEnv = path.resolve(__dirname, '.env');
+const hostingerRoot = process.env.LSNODE_ROOT ? path.resolve(process.env.LSNODE_ROOT, '.env') : null;
+
+smartLog('📂 Diagnostic Paths:');
+smartLog('- Local Dir: ' + __dirname);
+smartLog('- Parent Path: ' + parentEnv);
+if (hostingerRoot) smartLog('- Hostinger Root Path: ' + hostingerRoot);
 
 if (fs.existsSync(parentEnv)) {
     smartLog('📝 Loading environment from Root (.env): ' + parentEnv);
@@ -19,8 +25,11 @@ if (fs.existsSync(parentEnv)) {
 } else if (fs.existsSync(localEnv)) {
     smartLog('📝 Loading environment from Local (.env): ' + localEnv);
     require('dotenv').config({ path: localEnv });
+} else if (hostingerRoot && fs.existsSync(hostingerRoot)) {
+    smartLog('📝 Loading environment from Hostinger Root: ' + hostingerRoot);
+    require('dotenv').config({ path: hostingerRoot });
 } else {
-    smartLog('⚠️ No .env file found in Root or Local directory.');
+    smartLog('⚠️ No .env file found at any checked location.');
 }
 
 // Diagnostics
