@@ -1,17 +1,6 @@
 import path from 'path';
 import dotenv from 'dotenv';
-
-// Search for .env in multiple locations
-const envPaths = [
-    path.resolve(process.cwd(), '.env'),             // Current directory
-    path.resolve(__dirname, '../.env'),              // Parent of src (backend root)
-    path.resolve(__dirname, '../../.env'),           // Two levels up (project root)
-    path.resolve(__dirname, '.env'),                 // Next to this file
-];
-
-envPaths.forEach(envPath => {
-    dotenv.config({ path: envPath, override: false });
-});
+dotenv.config()
 
 import express from 'express';
 import cors from 'cors';
@@ -41,6 +30,7 @@ app.use('/api/scans', scanRoutes);
 app.use('/api/stats', statsRoutes);
 
 const ROOT = path.join(__dirname, '..');
+console.log("DATABASE_URL:", process.env.DATABASE_URL?.slice(0, 25));
 
 app.use('/verify', express.static(path.join(ROOT, 'public-verifier/dist')));
 app.use(express.static(path.join(ROOT, 'dashboard/dist')));
