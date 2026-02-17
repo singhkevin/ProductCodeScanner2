@@ -5,17 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const path_1 = __importDefault(require("path"));
 const dotenv_1 = __importDefault(require("dotenv"));
-// Search for .env in multiple locations
-const envPaths = [
-    path_1.default.resolve(process.cwd(), '.env'), // Current directory
-    path_1.default.resolve(process.cwd(), '../.env'), // Parent of backend
-    path_1.default.resolve(__dirname, '.env'), // Next to this file
-    path_1.default.resolve(__dirname, '../.env'), // One level up
-    path_1.default.resolve(__dirname, '../../.env'), // Two levels up (root if in backend/dist)
-];
-envPaths.forEach(envPath => {
-    dotenv_1.default.config({ path: envPath, override: false });
-});
+dotenv_1.default.config();
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const authRoutes_1 = __importDefault(require("./routes/authRoutes"));
@@ -36,7 +26,7 @@ app.use('/api/auth', authRoutes_1.default);
 app.use('/api/products', productRoutes_1.default);
 app.use('/api/scans', scanRoutes_1.default);
 app.use('/api/stats', statsRoutes_1.default);
-const ROOT = path_1.default.join(__dirname, '../..');
+const ROOT = path_1.default.join(__dirname, '..');
 app.use('/verify', express_1.default.static(path_1.default.join(ROOT, 'public-verifier/dist')));
 app.use(express_1.default.static(path_1.default.join(ROOT, 'dashboard/dist')));
 app.get('/verify/*path', (_, res) => {
