@@ -10,8 +10,7 @@
     "prisma:generate": "prisma generate",
     "build:dashboard": "node ../sync-envs.js && cd ../dashboard && npm install && npm run build",
     "build:verifier": "node ../sync-envs.js && cd ../public-verifier && npm install && npm run build",
-    "build:full": "node ../sync-envs.js && npm run build:dashboard && npm run build:verifier && npm run build",
-    "postinstall": "npm run build"
+    "postinstall": "node ../sync-envs.js && npm run build:dashboard && npm run build:verifier && npm run build"
   },
   "keywords": [],
   "author": "",
