@@ -5,12 +5,13 @@
   "main": "dist/index.js",
   "scripts": {
     "dev": "ts-node-dev src/index.ts",
-    "build": "tsc",
+    "build": "prisma generate && tsc",
     "start": "node dist/index.js",
     "prisma:generate": "prisma generate",
     "build:dashboard": "cd ../dashboard && npm install && npm run build",
     "build:verifier": "cd ../public-verifier && npm install && npm run build",
-    "postinstall": "npm run prisma:generate && npm run build:dashboard && npm run build:verifier"
+    "build:full": "npm run build:dashboard && npm run build:verifier && npm run build",
+    "postinstall": "npm run build"
   },
   "keywords": [],
   "author": "",

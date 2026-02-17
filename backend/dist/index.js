@@ -3,39 +3,51 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const path_1 = __importDefault(require("path"));
 const dotenv_1 = __importDefault(require("dotenv"));
-dotenv_1.default.config();
+// Search for .env in multiple locations
+const envPaths = [
+    path_1.default.resolve(process.cwd(), '.env'), // Current directory
+    path_1.default.resolve(process.cwd(), '../.env'), // Parent of backend
+    path_1.default.resolve(__dirname, '.env'), // Next to this file
+    path_1.default.resolve(__dirname, '../.env'), // One level up
+    path_1.default.resolve(__dirname, '../../.env'), // Two levels up (root if in backend/dist)
+];
+envPaths.forEach(envPath => {
+    dotenv_1.default.config({ path: envPath, override: false });
+});
 const express_1 = __importDefault(require("express"));
-const path_1 = __importDefault(require("path")); // Add this
 const cors_1 = __importDefault(require("cors"));
 const authRoutes_1 = __importDefault(require("./routes/authRoutes"));
 const productRoutes_1 = __importDefault(require("./routes/productRoutes"));
 const scanRoutes_1 = __importDefault(require("./routes/scanRoutes"));
 const statsRoutes_1 = __importDefault(require("./routes/statsRoutes"));
+process.on('uncaughtException', err => {
+    console.error('UNCAUGHT EXCEPTION:', err);
+});
+process.on('unhandledRejection', err => {
+    console.error('UNHANDLED PROMISE:', err);
+});
 const app = (0, express_1.default)();
-const PORT = process.env.PORT || 5000;
+const PORT = Number(process.env.PORT || 5000);
 app.use((0, cors_1.default)());
 app.use(express_1.default.json());
-// API Routes
 app.use('/api/auth', authRoutes_1.default);
 app.use('/api/products', productRoutes_1.default);
 app.use('/api/scans', scanRoutes_1.default);
 app.use('/api/stats', statsRoutes_1.default);
-// --- STATIC FRONTEND SERVING ---
-// 1. Serve Public Verifier at /verify
-app.use('/verify', express_1.default.static(path_1.default.join(__dirname, '../../public-verifier/dist')));
-// 2. Serve Dashboard at the Root (/)
-app.use(express_1.default.static(path_1.default.join(__dirname, '../../dashboard/dist')));
-app.get('/health', (req, res) => {
-    res.json({ status: 'OK', message: 'Product Code Scanner API is running' });
+const ROOT = path_1.default.join(__dirname, '../..');
+app.use('/verify', express_1.default.static(path_1.default.join(ROOT, 'public-verifier/dist')));
+app.use(express_1.default.static(path_1.default.join(ROOT, 'dashboard/dist')));
+app.get('/verify/*path', (_, res) => {
+    res.sendFile(path_1.default.join(ROOT, 'public-verifier/dist/index.html'));
 });
-// 3. Catch-all for React Routers
-app.get('/verify/*', (req, res) => {
-    res.sendFile(path_1.default.join(__dirname, '../../public-verifier/dist/index.html'));
+app.get('/*path', (_, res) => {
+    res.sendFile(path_1.default.join(ROOT, 'dashboard/dist/index.html'));
 });
-app.get('*', (req, res) => {
-    res.sendFile(path_1.default.join(__dirname, '../../dashboard/dist/index.html'));
+app.get('/health', (_, res) => {
+    res.json({ status: 'OK' });
 });
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+app.listen(PORT, '0.0.0.0', () => {
+    console.log(`Server running on port ${PORT}`);
 });

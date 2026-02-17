@@ -4,7 +4,7 @@ import { ShieldCheck, ShieldAlert, Scan, MapPin, Loader2, RefreshCw } from 'luci
 import axios from 'axios';
 
 // Get API URL from env or fallback
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+const API_URL = import.meta.env.VITE_API_URL || '/api';
 
 export default function App() {
   const [scanned, setScanned] = useState(false);

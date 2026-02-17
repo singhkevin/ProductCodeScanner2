@@ -1,8 +1,17 @@
 import path from 'path';
 import dotenv from 'dotenv';
 
-dotenv.config({
-    path: path.resolve(__dirname, '../../.env')
+// Search for .env in multiple locations
+const envPaths = [
+    path.resolve(process.cwd(), '.env'),             // Current directory
+    path.resolve(process.cwd(), '../.env'),          // Parent of backend
+    path.resolve(__dirname, '.env'),                 // Next to this file
+    path.resolve(__dirname, '../.env'),              // One level up
+    path.resolve(__dirname, '../../.env'),           // Two levels up (root if in backend/dist)
+];
+
+envPaths.forEach(envPath => {
+    dotenv.config({ path: envPath, override: false });
 });
 
 import express from 'express';
