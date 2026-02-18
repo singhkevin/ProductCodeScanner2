@@ -174,18 +174,28 @@ export const handleBulkRequest = async (req: AuthRequest, res: Response) => {
 
 export const getCompanyProducts = async (req: AuthRequest, res: Response) => {
     try {
-        const companyId = req.user?.companyId;
-        if (!companyId) {
-            return res.status(403).json({ message: 'Access denied' });
+        const { companyId, role } = req.user!;
+
+        // If Admin and no specific companyId, show all products
+        // If Admin and specific companyId (from query?), could filter, but for now global view
+        // If Company user, must filter by their companyId
+
+        let where: any = {};
+        if (role === 'COMPANY') {
+            if (!companyId) return res.status(403).json({ message: 'Company ID missing' });
+            where.companyId = companyId;
+        } else if (role === 'ADMIN') {
+            // Admin can see everything, or filter if implemented later
+            where = {};
         }
 
         const products = await prisma.product.findMany({
-            where: { companyId },
+            where,
             include: { qrCodes: true },
+            orderBy: { createdAt: 'desc' }
         });
 
-        console.log(`📡 Returning ${products.length} products for Company: ${companyId}`);
-        products.forEach(p => console.log(`   - ${p.name}: ${p.qrCodes.length} codes`));
+        console.log(`📡 Returning ${products.length} products for ${role}: ${companyId || 'ALL'}`);
 
         res.json(products);
     } catch (error: any) {

@@ -3,21 +3,46 @@
 @tailwind utilities;
 
 :root {
-  background-color: #020617;
-  /* slate-950 */
+  --primary: #6366f1;
+  --bg-main: #020617;
+  --card-bg: #0f172a;
+
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: dark;
   color: white;
+  background-color: var(--bg-main);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
   margin: 0;
   min-height: 100vh;
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background-color: var(--bg-main);
+  background-image:
+    radial-gradient(at 0% 0%, hsla(253, 16%, 7%, 1) 0, transparent 50%),
+    radial-gradient(at 50% 0%, hsla(225, 39%, 30%, 1) 0, transparent 50%),
+    radial-gradient(at 100% 0%, hsla(339, 49%, 30%, 1) 0, transparent 50%);
+  background-attachment: fixed;
+  background-size: 100% 100%;
+}
+
+.glass {
+  @apply bg-white/5 backdrop-blur-xl border border-white/10;
 }
 
 #reader {
   border: none !important;
-  border-radius: 1.5rem !important;
+  border-radius: 2rem !important;
   overflow: hidden !important;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5) !important;
+  background: #0f172a !important;
 }
 
 #reader__scan_region {
@@ -25,28 +50,27 @@ body {
 }
 
 #reader__dashboard {
-  background: transparent !important;
-  padding: 1rem !important;
+  background: #0f172a !important;
+  padding: 1.5rem !important;
   color: white !important;
 }
 
 #reader__dashboard button {
-  background-color: #2563eb !important;
-  /* blue-600 */
+  @apply px-4 py-2 rounded-xl font-bold uppercase tracking-widest text-[10px] transition-all active:scale-95 !important;
+  background-color: #4f46e5 !important;
   color: white !important;
-  padding: 0.5rem 1rem !important;
-  border-radius: 0.5rem !important;
   border: none !important;
-  font-weight: 600 !important;
-  cursor: pointer !important;
   margin: 0.5rem !important;
+  box-shadow: 0 10px 15px -3px rgba(79, 70, 229, 0.3) !important;
 }
 
 #reader__camera_selection {
   background-color: #1e293b !important;
-  /* slate-800 */
   color: white !important;
-  padding: 0.5rem !important;
-  border-radius: 0.5rem !important;
+  padding: 0.75rem !important;
+  border-radius: 1rem !important;
   border: 1px solid #334155 !important;
+  font-size: 0.75rem !important;
+  font-weight: 600 !important;
+  outline: none !important;
 }

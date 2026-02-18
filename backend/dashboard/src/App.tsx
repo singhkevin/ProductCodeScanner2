@@ -50,7 +50,7 @@ function App() {
   };
 
   return (
-    <div className="flex h-screen bg-[#111111] font-sans selection:bg-[#facc15] selection:text-black">
+    <div className="flex h-screen bg-[#0f172a] font-sans selection:bg-indigo-500 selection:text-white">
       <Sidebar
         activeTab={activeTab}
         setActiveTab={setActiveTab}
@@ -60,48 +60,45 @@ function App() {
 
       <div className="flex-1 flex flex-col overflow-hidden">
         {/* Header */}
-        <header className="h-24 flex items-center justify-between px-10 border-b-[6px] border-black bg-white">
-          <div className="flex items-center gap-10">
-            <div className="flex items-center gap-4 pr-10 border-r-[4px] border-black">
-              <div className={`w-4 h-4 border-2 border-black ${user.role === 'ADMIN' ? 'bg-[#3b82f6]' : 'bg-[#a855f7]'}`}></div>
-              <h2 className="text-black font-black tracking-tighter text-2xl uppercase">
-                {user.role === 'ADMIN' ? 'Admin.OS' : 'Partner.OS'}
+        <header className="h-20 flex items-center justify-between px-8 bg-slate-900/95 backdrop-blur-md border-b border-slate-800">
+          <div className="flex items-center gap-8">
+            <div className="flex items-center gap-4 pr-8 border-r border-slate-800">
+              <div className={`w-2.5 h-2.5 rounded-full shadow-lg ${user.role === 'ADMIN' ? 'bg-indigo-500 shadow-indigo-500/30' : 'bg-purple-500 shadow-purple-500/30'}`}></div>
+              <h2 className="text-white font-bold tracking-tight text-lg">
+                {user.role === 'ADMIN' ? 'Security Node' : 'Partner Portal'}
               </h2>
             </div>
-            <div className="relative w-[400px] group">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-black z-10" size={20} />
+            <div className="relative w-[320px] group">
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 group-focus-within:text-indigo-400 transition-colors" size={18} />
               <input
                 type="text"
-                placeholder="QUERY_RESOURCES..."
-                className="w-full bg-[#eeeeee] border-[4px] border-black text-black pl-14 pr-4 py-3 focus:bg-white focus:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all placeholder:text-black/40 font-black uppercase text-sm"
+                placeholder="Search telemetry..."
+                className="w-full bg-slate-800/50 border border-slate-700 text-slate-200 pl-11 pr-4 py-2.5 rounded-xl focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10 transition-all placeholder:text-slate-500 text-sm font-medium"
               />
             </div>
           </div>
 
-          <div className="flex items-center gap-8">
-            <button className="bg-white border-[4px] border-black p-3 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-all relative">
-              <Bell size={24} className="text-black" />
-              <span className="absolute -top-2 -right-2 w-5 h-5 bg-[#ef4444] border-2 border-black text-[10px] font-black flex items-center justify-center text-white">3</span>
+          <div className="flex items-center gap-6">
+            <button className="p-2.5 rounded-xl bg-slate-800/50 border border-slate-700 text-slate-400 hover:text-white hover:bg-slate-800 transition-all relative group">
+              <Bell size={20} className="group-hover:scale-110 transition-transform" />
+              <span className="absolute top-2.5 right-2.5 w-2 h-2 bg-rose-500 rounded-full border-2 border-slate-900"></span>
             </button>
-            <div className="flex items-center gap-6 pl-8 border-l-[4px] border-black">
+            <div className="flex items-center gap-4 pl-6 border-l border-slate-800">
               <div className="text-right">
-                <p className="text-sm font-black text-black leading-none tracking-tighter uppercase">{user.name}</p>
-                <div className="flex items-center justify-end gap-2 mt-2">
-                  <span className={`text-[10px] px-3 py-1 border-2 border-black font-black uppercase tracking-tighter ${user.role === 'ADMIN' ? 'bg-[#3b82f6] text-white' : 'bg-[#a855f7] text-white'
-                    }`}>
-                    {user.role}
-                  </span>
-                </div>
+                <p className="text-sm font-bold text-white leading-none whitespace-nowrap">{user.name}</p>
+                <span className={`text-[10px] font-bold uppercase tracking-widest mt-1.5 block ${user.role === 'ADMIN' ? 'text-indigo-400' : 'text-purple-400'}`}>
+                  {user.role}
+                </span>
               </div>
-              <div className={`w-14 h-14 border-[4px] border-black flex items-center justify-center bg-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]`}>
-                <UserIcon size={32} className="text-black" />
+              <div className="w-10 h-10 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center shadow-sm text-slate-400 group hover:text-white transition-all">
+                <UserIcon size={20} className="transition-transform group-hover:scale-110" />
               </div>
             </div>
           </div>
         </header>
 
         {/* Main Content */}
-        <main className="flex-1 overflow-y-auto p-12 bg-[#eeeeee]">
+        <main className="flex-1 overflow-y-auto p-8 bg-[#f8fafc]/5 backdrop-blur-sm">
           <div className="max-w-7xl mx-auto w-full">
             {renderContent()}
           </div>

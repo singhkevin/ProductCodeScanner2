@@ -3,23 +3,20 @@
 @tailwind utilities;
 
 :root {
-  --bg-color: #000000;
-  --fg-color: #ffffff;
-  --accent-blue: #3b82f6;
-  --accent-green: #22c55e;
-  --accent-yellow: #facc15;
-  --accent-red: #ef4444;
-  --brutal-border: 4px solid #000000;
-  --brutal-shadow: 8px 8px 0px 0px #000000;
-  --brutal-shadow-sm: 4px 4px 0px 0px #000000;
+  --primary: #6366f1;
+  --primary-hover: #4f46e5;
+  --bg-main: #f8fafc;
+  --card-bg: #ffffff;
+  --text-main: #0f172a;
+  --text-muted: #64748b;
 
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   line-height: 1.5;
-  font-weight: 500;
+  font-weight: 400;
 
-  color-scheme: dark;
-  color: var(--fg-color);
-  background-color: #111111;
+  color-scheme: light;
+  color: var(--text-main);
+  background-color: var(--bg-main);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -28,40 +25,32 @@
 }
 
 @layer components {
-  .brutal-card {
-    @apply bg-white text-black border-[4px] border-black shadow-[8px_8px_0px_0px_rgba(0, 0, 0, 1)] transition-all;
+  .modern-card {
+    @apply bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-all duration-300;
   }
 
-  .brutal-card-dark {
-    @apply bg-[#1e293b] text-white border-[4px] border-black shadow-[8px_8px_0px_0px_rgba(30, 41, 59, 0.5)] transition-all;
+  .modern-btn {
+    @apply px-4 py-2 rounded-xl font-semibold transition-all duration-200 active:scale-[0.98] disabled:opacity-50 disabled:pointer-events-none;
   }
 
-  .brutal-btn {
-    @apply border-[4px] border-black shadow-[4px_4px_0px_0px_rgba(0, 0, 0, 1)] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] active:translate-x-[4px] active:translate-y-[4px] transition-all font-black uppercase tracking-tighter disabled:opacity-50 disabled:shadow-none;
+  .btn-primary {
+    @apply modern-btn bg-indigo-600 text-white hover:bg-indigo-700 shadow-sm hover:shadow-indigo-200;
   }
 
-  .brutal-btn-blue {
-    @apply brutal-btn bg-[#3b82f6] text-white;
+  .btn-secondary {
+    @apply modern-btn bg-white text-slate-700 border border-slate-200 hover:bg-slate-50;
   }
 
-  .brutal-btn-green {
-    @apply brutal-btn bg-[#22c55e] text-black;
+  .btn-danger {
+    @apply modern-btn bg-rose-500 text-white hover:bg-rose-600;
   }
 
-  .brutal-btn-yellow {
-    @apply brutal-btn bg-[#facc15] text-black;
+  .modern-input {
+    @apply w-full px-4 py-2 rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all;
   }
 
-  .brutal-btn-red {
-    @apply brutal-btn bg-[#ef4444] text-white;
-  }
-
-  .brutal-input {
-    @apply border-[4px] border-black bg-white text-black px-4 py-2 focus:outline-none focus:ring-4 focus:ring-black/10 transition-all font-bold;
-  }
-
-  .brutal-badge {
-    @apply border-2 border-black px-3 py-1 text-[10px] font-black uppercase tracking-widest;
+  .modern-badge {
+    @apply px-2.5 py-0.5 rounded-full text-xs font-semibold uppercase tracking-wider;
   }
 }
 
@@ -69,9 +58,22 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
-  background-color: #111111;
-  background-image: radial-gradient(#222 10%, transparent 10%);
-  background-size: 20px 20px;
+  background-color: var(--bg-main);
+  background-image:
+    radial-gradient(at 0% 0%, hsla(253, 16%, 7%, 1) 0, transparent 50%),
+    radial-gradient(at 50% 0%, hsla(225, 39%, 30%, 1) 0, transparent 50%),
+    radial-gradient(at 100% 0%, hsla(339, 49%, 30%, 1) 0, transparent 50%);
+  background-attachment: fixed;
+  background-size: 100% 100%;
+}
+
+/* Custom glass effect */
+.glass {
+  @apply bg-white/70 backdrop-blur-md border border-white/20;
+}
+
+.premium-card {
+  @apply bg-slate-900/80 backdrop-blur-xl border border-slate-800 shadow-xl shadow-black/20 hover:border-slate-700/50 transition-all duration-300;
 }
 
 #root {

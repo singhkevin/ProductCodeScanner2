@@ -13,7 +13,10 @@ export function Sidebar({ activeTab, setActiveTab, user, onLogout }: SidebarProp
     const menuItems = [
         { icon: LayoutDashboard, label: 'Overview', id: 'overview' },
         ...(isAdmin
-            ? [{ icon: Package, label: 'Approval Queue', id: 'approvals' }]
+            ? [
+                { icon: Package, label: 'Approval Queue', id: 'approvals' },
+                { icon: Package, label: 'Active Inventory', id: 'inventory' }
+            ]
             : [
                 { icon: Upload, label: 'Bulk Upload', id: 'bulk' },
                 { icon: Plus, label: 'Add Product', id: 'add-product' },
@@ -24,24 +27,26 @@ export function Sidebar({ activeTab, setActiveTab, user, onLogout }: SidebarProp
     ];
 
     return (
-        <div className="w-72 h-screen flex flex-col p-6 bg-[#111111] border-r-[6px] border-black">
-            <div className="p-6 mb-10 flex items-center gap-4 bg-[#facc15] border-[4px] border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]">
-                <ShieldCheck className="text-black" size={32} />
-                <span className="font-black text-2xl tracking-tighter text-black uppercase">GuardHub</span>
+        <div className="w-72 h-screen flex flex-col p-6 bg-slate-900/95 backdrop-blur-md border-r border-slate-800">
+            <div className="px-4 py-8 mb-10 flex items-center gap-3">
+                <div className="bg-gradient-to-br from-indigo-500 to-purple-600 p-2.5 rounded-2xl shadow-xl shadow-indigo-500/20">
+                    <ShieldCheck className="text-white" size={26} />
+                </div>
+                <span className="font-bold text-xl tracking-tight text-white uppercase">GuardHub</span>
             </div>
 
-            <nav className="flex-1 space-y-6">
+            <nav className="flex-1 space-y-2">
                 {menuItems.map((item) => (
                     <button
                         key={item.id}
                         onClick={() => setActiveTab(item.id)}
-                        className={`w-full flex items-center gap-4 px-6 py-4 border-[4px] border-black transition-all font-black uppercase tracking-tighter ${activeTab === item.id
-                            ? 'bg-[#3b82f6] text-white translate-x-[4px] translate-y-[4px] shadow-none'
-                            : 'bg-white text-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none'
+                        className={`w-full flex items-center gap-3 px-5 py-3.5 rounded-2xl transition-all duration-300 group ${activeTab === item.id
+                            ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-600/30'
+                            : 'text-slate-400 hover:bg-white/5 hover:text-white'
                             }`}
                     >
-                        <item.icon size={22} className={activeTab === item.id ? 'text-white' : 'text-black'} />
-                        <span className="text-sm">{item.label}</span>
+                        <item.icon size={20} className={activeTab === item.id ? 'text-white' : 'text-slate-400 group-hover:text-white transition-colors'} />
+                        <span className="text-sm font-semibold">{item.label}</span>
                     </button>
                 ))}
             </nav>
@@ -49,10 +54,10 @@ export function Sidebar({ activeTab, setActiveTab, user, onLogout }: SidebarProp
             <div className="mt-auto">
                 <button
                     onClick={onLogout}
-                    className="w-full flex items-center gap-4 px-6 py-4 bg-[#ef4444] text-white border-[4px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[2px] hover:translate-y-[2px] transition-all font-black uppercase tracking-tighter"
+                    className="w-full flex items-center gap-3 px-5 py-4 text-rose-400 hover:bg-rose-500/10 hover:text-rose-400 rounded-2xl transition-all duration-300 font-bold uppercase tracking-wider text-[10px]"
                 >
-                    <LogOut size={22} />
-                    <span className="text-sm">Sever Session</span>
+                    <LogOut size={20} />
+                    <span>End Session</span>
                 </button>
             </div>
         </div>

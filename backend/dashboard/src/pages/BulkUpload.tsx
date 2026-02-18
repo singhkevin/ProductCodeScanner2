@@ -38,23 +38,23 @@ export default function BulkUpload() {
     };
 
     return (
-        <div className="max-w-5xl space-y-12 animate-in fade-in duration-700 pb-20">
-            <div className="px-2 border-b-[4px] border-black pb-8">
-                <h1 className="text-4xl font-black text-black tracking-tighter uppercase selection:bg-black selection:text-[#facc15]">Bulk Ingress</h1>
-                <p className="text-black font-black italic mt-1 font-mono tracking-tighter uppercase text-xs">Scalable asset registration & cryptographic payload terminal</p>
+        <div className="max-w-5xl space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700 pb-20">
+            <div className="pb-6 border-b border-slate-200/50">
+                <h1 className="text-3xl font-bold text-white tracking-tight">Bulk Asset Ingress</h1>
+                <p className="text-slate-400 mt-1 text-sm">Scalable registration terminal for cryptographic payloads</p>
             </div>
 
-            <div className="bg-white border-[6px] border-black shadow-[14px_14px_0px_0px_rgba(0,0,0,1)] p-16 relative group transition-all duration-500">
+            <div className="premium-card border-2 border-dashed border-slate-800/50 p-16 rounded-3xl group ">
                 <div className="flex flex-col items-center justify-center text-center relative z-10">
-                    <div className="p-10 border-[4px] border-black bg-[#eeeeee] shadow-[8px_8px_0px_0px_black] text-[#3b82f6] mb-12 group-hover:-translate-x-1 group-hover:-translate-y-1 group-hover:shadow-[12px_12px_0px_0px_black] transition-all">
-                        <Upload size={56} strokeWidth={3} />
+                    <div className="p-8 rounded-2xl bg-indigo-500/10 text-indigo-400 mb-8 group-hover:scale-110 transition-transform duration-500 ring-1 ring-white/5">
+                        <Upload size={48} />
                     </div>
 
-                    <h3 className="text-3xl font-black text-black mb-4 tracking-tighter uppercase">
-                        {file ? file.name : 'Awaiting Payload'}
+                    <h3 className="text-2xl font-bold text-white mb-2 tracking-tight">
+                        {file ? file.name : 'Drop payload here'}
                     </h3>
-                    <p className="text-black/50 font-black tracking-[0.3em] text-xs uppercase mb-12 italic border-b-2 border-black/10 pb-2">
-                        Surface drop or manual mapping enabled
+                    <p className="text-slate-500 text-sm mb-10 max-w-xs mx-auto leading-relaxed">
+                        Secure CSV mapping protocol enabled for mass asset distribution
                     </p>
 
                     <input
@@ -67,27 +67,27 @@ export default function BulkUpload() {
 
                     <label
                         htmlFor="file-upload"
-                        className="bg-black text-white px-12 py-5 border-[4px] border-black shadow-[6px_6px_0px_0px_rgba(59,130,246,1)] cursor-pointer font-black uppercase tracking-[0.3em] text-xs transition-all hover:translate-x-1 hover:translate-y-1 hover:shadow-none active:scale-95"
+                        className="bg-indigo-600 hover:bg-indigo-500 text-white px-10 py-3.5 rounded-xl cursor-pointer font-semibold text-sm transition-all shadow-lg shadow-indigo-600/20 active:scale-95"
                     >
-                        {file ? 'Replace Mapping' : 'Initiate Mapping'}
+                        {file ? 'Replace File' : 'Select CSV Payload'}
                     </label>
                 </div>
             </div>
 
-            <div className="bg-[#facc15] border-[4px] border-black p-10 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex flex-col md:flex-row items-center gap-10 group">
-                <div className="flex items-center gap-8 flex-1">
-                    <div className="p-6 bg-white border-2 border-black text-black shadow-[4px_4px_0px_0px_black]">
-                        <FileText size={32} strokeWidth={3} />
+            <div className="bg-indigo-600/10 border border-indigo-500/20 p-8 rounded-2xl flex flex-col md:flex-row items-center gap-8">
+                <div className="flex items-center gap-6 flex-1">
+                    <div className="p-4 bg-white/5 rounded-xl text-indigo-400 ring-1 ring-white/10 shrink-0">
+                        <FileText size={28} />
                     </div>
                     <div className="flex-1">
-                        <h4 className="text-black font-black text-[12px] uppercase tracking-[0.3em] mb-2 px-1 border-l-4 border-black">Structure Protocol</h4>
-                        <p className="text-black font-black text-xs leading-relaxed uppercase italic">
-                            Payload must include: <code className="bg-black text-[#facc15] px-2 py-0.5">product_name</code>, <code className="bg-black text-[#facc15] px-2 py-0.5">sku</code>, <code className="bg-black text-[#facc15] px-2 py-0.5">batch_number</code>, <code className="bg-black text-[#facc15] px-2 py-0.5">quantity</code>.
+                        <h4 className="text-white font-semibold text-sm mb-1">Structure Protocol</h4>
+                        <p className="text-slate-400 text-xs leading-relaxed">
+                            Required parameters: <code className="text-indigo-400 bg-indigo-400/10 px-1.5 py-0.5 rounded">product_name</code>, <code className="text-indigo-400 bg-indigo-400/10 px-1.5 py-0.5 rounded">sku</code>, <code className="text-indigo-400 bg-indigo-400/10 px-1.5 py-0.5 rounded">batch_number</code>, <code className="text-indigo-400 bg-indigo-400/10 px-1.5 py-0.5 rounded">quantity</code>.
                         </p>
                     </div>
                 </div>
-                <button className="bg-white border-[3px] border-black px-8 py-4 text-[11px] font-black text-black uppercase tracking-widest shadow-[4px_4px_0px_0px_black] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all">
-                    DL_TEMPLATE_MAP
+                <button className="bg-white/5 hover:bg-white/10 text-white border border-white/10 px-6 py-3 rounded-xl text-xs font-semibold transition-all shrink-0">
+                    Download Template
                 </button>
             </div>
 
@@ -95,40 +95,40 @@ export default function BulkUpload() {
                 <button
                     onClick={handleUpload}
                     disabled={uploading}
-                    className="w-full py-8 bg-[#3b82f6] text-white border-[6px] border-black shadow-[10px_10px_0px_0px_rgba(0,0,0,1)] hover:shadow-none hover:translate-x-[4px] hover:translate-y-[4px] font-black uppercase tracking-[0.4em] text-sm transition-all flex items-center justify-center gap-6 disabled:opacity-50"
+                    className="w-full py-5 bg-gradient-to-r from-indigo-600 to-indigo-700 hover:from-indigo-500 hover:to-indigo-600 text-white rounded-2xl shadow-xl shadow-indigo-600/20 font-bold text-sm transition-all flex items-center justify-center gap-3 disabled:opacity-50 active:scale-[0.99]"
                 >
-                    {uploading ? <Loader2 className="animate-spin" size={28} /> : <div className="w-4 h-4 bg-white border-2 border-black animate-pulse"></div>}
+                    {uploading ? <Loader2 className="animate-spin" size={20} /> : <Upload size={20} />}
                     {uploading ? 'Transmitting Cryptographic Mesh...' : 'Commit Upload to Queue'}
                 </button>
             )}
 
             {result && (
-                <div className="bg-[#22c55e] border-[6px] border-black p-12 shadow-[14px_14px_0px_0px_rgba(0,0,0,1)] animate-in zoom-in-95 duration-500">
-                    <div className="flex justify-between items-start mb-12">
-                        <div className="flex items-center gap-8">
-                            <div className="p-6 bg-white border-2 border-black text-black shadow-[6px_6px_0px_0px_black]">
-                                <CheckCircle2 size={40} strokeWidth={3} />
+                <div className="bg-emerald-500/10 border border-emerald-500/20 p-10 rounded-3xl animate-in zoom-in-95 duration-500 flex flex-col gap-8">
+                    <div className="flex justify-between items-start">
+                        <div className="flex items-center gap-6">
+                            <div className="p-4 bg-emerald-500 rounded-2xl text-white shadow-lg shadow-emerald-500/20">
+                                <CheckCircle2 size={32} />
                             </div>
                             <div>
-                                <h3 className="text-3xl font-black text-white tracking-tighter uppercase selection:bg-black selection:text-[#22c55e]">Transmission Successful</h3>
-                                <p className="text-black font-black text-[11px] uppercase tracking-widest mt-2 italic px-2 border-l-4 border-black/30">Payload awaiting core administrative verification</p>
+                                <h3 className="text-2xl font-bold text-white tracking-tight">Inbound Synchronized</h3>
+                                <p className="text-slate-400 text-sm mt-1">Payload awaiting administrative verification</p>
                             </div>
                         </div>
-                        <button onClick={() => { setResult(null); setFile(null); }} className="bg-white border-[3px] border-black p-4 hover:translate-x-1 hover:translate-y-1 hover:shadow-none shadow-[4px_4px_0px_0px_black] transition-all text-black">
-                            <X size={24} strokeWidth={3} />
+                        <button onClick={() => { setResult(null); setFile(null); }} className="text-slate-500 hover:text-white transition-colors">
+                            <X size={24} />
                         </button>
                     </div>
 
-                    <div className="space-y-10">
-                        <div className="bg-black text-[#22c55e] p-8 border-[4px] border-white/20">
-                            <p className="text-[#22c55e]/50 text-[11px] font-black uppercase tracking-[0.4em] mb-4">Request Hash ID</p>
-                            <p className="font-mono text-3xl font-black tracking-[0.2em]">{result.id.toUpperCase()}</p>
+                    <div className="space-y-6">
+                        <div className="bg-slate-900/60 p-6 rounded-2xl border border-white/5">
+                            <p className="text-slate-500 text-[10px] font-bold uppercase tracking-widest mb-3">Transmission Hash</p>
+                            <p className="font-mono text-xl font-bold text-emerald-400 tracking-wider overflow-x-auto">{result.id}</p>
                         </div>
 
-                        <div className="flex items-start gap-6 p-8 bg-white/10 border-2 border-black/20">
-                            <AlertCircle size={24} className="text-white shrink-0 mt-1" strokeWidth={3} />
-                            <p className="text-white font-black text-xs leading-relaxed uppercase italic">
-                                {result.message} Assets will be distributed into the global mesh once verified by a core administrator. Priority protocol active.
+                        <div className="flex items-start gap-4 p-5 bg-white/5 rounded-xl border border-white/5">
+                            <AlertCircle size={18} className="text-emerald-500 shrink-0 mt-0.5" />
+                            <p className="text-slate-300 text-xs leading-relaxed">
+                                {result.message} Assets will be distributed into the global mesh once verified.
                             </p>
                         </div>
                     </div>

@@ -32,7 +32,7 @@ export const register = async (req: Request, res: Response) => {
             { expiresIn: '24h' }
         );
 
-        res.status(201).json({ token, user: { id: user.id, email: user.email, name: user.name, role: user.role } });
+        res.status(201).json({ token, user: { id: user.id, email: user.email, name: user.name, role: user.role, companyId: user.companyId } });
     } catch (error: any) {
         res.status(500).json({ message: error.message });
     }
@@ -58,7 +58,7 @@ export const login = async (req: Request, res: Response) => {
             { expiresIn: '24h' }
         );
 
-        res.json({ token, user: { id: user.id, email: user.email, name: user.name, role: user.role } });
+        res.json({ token, user: { id: user.id, email: user.email, name: user.name, role: user.role, companyId: user.companyId } });
     } catch (error: any) {
         res.status(500).json({ message: error.message });
     }

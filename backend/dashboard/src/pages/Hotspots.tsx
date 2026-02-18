@@ -125,21 +125,21 @@ export default function HotspotsMap() {
     }, []);
 
     return (
-        <div className="space-y-12 flex flex-col animate-in fade-in duration-700">
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-8 px-2 border-b-[4px] border-black pb-8">
+        <div className="space-y-8 flex flex-col animate-in fade-in slide-in-from-bottom-4 duration-700">
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-slate-200/50">
                 <div>
-                    <h1 className="text-4xl font-black text-black tracking-tighter uppercase selection:bg-black selection:text-[#facc15]">Fraud Hotspots</h1>
-                    <p className="text-black font-black italic mt-1 font-mono tracking-tighter uppercase text-xs">Geospatial threat intelligence & vector mesh</p>
+                    <h1 className="text-3xl font-bold text-white tracking-tight">Geospatial Intelligence</h1>
+                    <p className="text-slate-400 mt-1 text-sm">Real-time fraud vectors and security telemetry</p>
                 </div>
-                <div className="bg-[#3b82f6] border-[3px] border-black px-8 py-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex items-center gap-4">
-                    <div className="w-4 h-4 bg-white border-2 border-black animate-pulse"></div>
-                    <span className="text-white text-[11px] font-black uppercase tracking-[0.2em]">Live Threat Stream</span>
+                <div className="bg-rose-500/10 border border-rose-500/20 px-6 py-3 rounded-2xl flex items-center gap-3 ring-1 ring-rose-500/10">
+                    <div className="w-2.5 h-2.5 bg-rose-500 rounded-full animate-pulse shadow-[0_0_12px_rgba(244,63,94,0.5)]"></div>
+                    <span className="text-rose-400 text-[10px] font-bold uppercase tracking-[0.2em]">Live Threat Stream</span>
                 </div>
             </div>
 
-            <div className="w-full h-[650px] bg-white border-[6px] border-black shadow-[12px_12px_0px_0px_rgba(0,0,0,1)] p-6 relative">
+            <div className="w-full h-[650px] premium-card p-4 relative overflow-hidden rounded-[2.5rem]">
                 {isLoaded ? (
-                    <div className="w-full h-full border-[4px] border-black overflow-hidden relative">
+                    <div className="w-full h-full rounded-[2rem] overflow-hidden relative border border-slate-800 shadow-inner">
                         <GoogleMap
                             mapContainerStyle={{ width: '100%', height: '100%' }}
                             center={center}
@@ -161,8 +161,12 @@ export default function HotspotsMap() {
                                     position={{ lat: spot.latitude, lng: spot.longitude }}
                                     onClick={() => setSelectedSpot(spot)}
                                     icon={{
-                                        url: 'https://maps.google.com/mapfiles/ms/icons/red-dot.png',
-                                        scaledSize: new google.maps.Size(40, 40)
+                                        path: google.maps.SymbolPath.CIRCLE,
+                                        fillColor: '#f43f5e',
+                                        fillOpacity: 0.9,
+                                        strokeWeight: 2,
+                                        strokeColor: '#ffffff',
+                                        scale: 10,
                                     }}
                                 />
                             ))}
@@ -172,15 +176,15 @@ export default function HotspotsMap() {
                                     position={{ lat: selectedSpot.latitude, lng: selectedSpot.longitude }}
                                     onCloseClick={() => setSelectedSpot(null)}
                                 >
-                                    <div className="p-4 bg-white border-[3px] border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] min-w-[200px]">
-                                        <h4 className="font-black text-black flex items-center gap-3 uppercase text-sm tracking-tighter">
-                                            <ShieldAlert size={18} className="text-[#ef4444]" />
-                                            Fraud Detected
+                                    <div className="p-4 bg-slate-900 border border-slate-800 rounded-2xl min-w-[220px] shadow-2xl">
+                                        <h4 className="font-bold text-white flex items-center gap-2.5 text-xs uppercase tracking-tight">
+                                            <ShieldAlert size={14} className="text-rose-500" />
+                                            Anomalous Event
                                         </h4>
-                                        <p className="text-[10px] font-bold text-black/60 mt-2 font-mono">{new Date(selectedSpot.createdAt).toLocaleString().toUpperCase()}</p>
-                                        <div className="mt-4 pt-3 border-t-2 border-black">
-                                            <span className="text-[9px] font-black uppercase text-white bg-[#ef4444] py-1 px-3 border-2 border-black">
-                                                Auth_Failure_Event
+                                        <p className="text-[10px] font-medium text-slate-500 mt-2 font-mono">{new Date(selectedSpot.createdAt).toLocaleString().toUpperCase()}</p>
+                                        <div className="mt-4 pt-4 border-t border-white/5">
+                                            <span className="text-[9px] font-bold uppercase text-white bg-rose-500 px-3 py-1 rounded-lg shadow-lg shadow-rose-500/20">
+                                                Auth_Failure_Verified
                                             </span>
                                         </div>
                                     </div>
@@ -189,51 +193,51 @@ export default function HotspotsMap() {
                         </GoogleMap>
                     </div>
                 ) : (
-                    <div className="w-full h-full flex flex-col items-center justify-center gap-6">
-                        <div className="w-16 h-16 border-[8px] border-black border-t-[#3b82f6] animate-spin"></div>
-                        <p className="text-black font-black uppercase text-sm tracking-widest italic">Initializing Geo_Terminal...</p>
+                    <div className="w-full h-full flex flex-col items-center justify-center gap-4">
+                        <div className="w-10 h-10 border-4 border-slate-800 border-t-indigo-500 rounded-full animate-spin"></div>
+                        <p className="text-slate-500 font-bold uppercase text-[10px] tracking-widest italic">Initializing Geo_Terminal...</p>
                     </div>
                 )}
 
-                <div className="absolute top-12 right-12 z-[10] bg-white border-[4px] border-black p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] w-72">
-                    <h4 className="text-black font-black text-[11px] uppercase tracking-[0.3em] mb-8 flex items-center gap-3">
-                        <MapPin size={20} className="text-[#3b82f6]" strokeWidth={3} />
-                        LEGEND_MESH
+                <div className="absolute top-10 right-10 z-[10] bg-slate-900/90 backdrop-blur-md border border-slate-800 p-8 rounded-3xl w-72 shadow-2xl">
+                    <h4 className="text-white font-bold text-[10px] uppercase tracking-[0.2em] mb-6 flex items-center gap-2.5">
+                        <MapPin size={16} className="text-indigo-500" />
+                        Legend Mesh
                     </h4>
                     <div className="space-y-6">
                         <div className="flex items-center justify-between group">
                             <div className="flex items-center gap-3">
-                                <div className="w-4 h-4 bg-[#ef4444] border-2 border-black shadow-[2px_2px_0px_0px_black] group-hover:translate-x-1 group-hover:translate-y-1 group-hover:shadow-none transition-all"></div>
-                                <span className="text-black text-[10px] font-black uppercase tracking-widest">Active Threats</span>
+                                <div className="w-3.5 h-3.5 bg-rose-500 rounded-full shadow-[0_0_12px_rgba(244,63,94,0.4)] transition-all"></div>
+                                <span className="text-slate-300 text-[10px] font-bold uppercase tracking-widest">Active Vectors</span>
                             </div>
-                            <div className="bg-black text-white px-3 py-1 text-[10px] font-black">
+                            <div className="bg-rose-500/10 text-rose-500 border border-rose-500/20 px-3 py-0.5 rounded-lg text-[10px] font-black">
                                 {hotspots.length}
                             </div>
                         </div>
-                        <p className="text-[10px] text-black/70 font-black leading-tight pt-6 border-t-2 border-black uppercase italic">
-                            High-confidence counterfeit vectors. Engage security protocols per region.
+                        <p className="text-[10px] text-slate-500 font-medium leading-relaxed pt-6 border-t border-white/5 uppercase italic">
+                            High-confidence counterfeit payloads. Security protocols active per regional quadrant.
                         </p>
                     </div>
                 </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 pt-4">
-                <div className="bg-white border-[4px] border-black shadow-[10px_10px_0px_0px_rgba(0,0,0,1)] p-10 flex items-center gap-10 hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[14px_14px_0px_0px_rgba(0,0,0,1)] transition-all">
-                    <div className="p-8 border-[4px] border-black bg-[#eeeeee] shadow-[6px_6px_0px_0px_black] text-[#ef4444]">
-                        <ShieldAlert size={48} strokeWidth={3} />
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-4">
+                <div className="premium-card p-8 rounded-[2rem] flex items-center gap-8 group">
+                    <div className="p-6 rounded-2xl bg-rose-500/10 text-rose-500 ring-1 ring-white/5 group-hover:scale-110 transition-transform">
+                        <ShieldAlert size={40} />
                     </div>
                     <div>
-                        <p className="text-black/50 text-[10px] font-black uppercase tracking-[0.3em] mb-2">Neutralized Vectors</p>
-                        <h2 className="text-5xl font-black text-black tracking-tighter uppercase">{stats?.fakeScans || 0}</h2>
+                        <p className="text-slate-500 text-[10px] font-bold uppercase tracking-widest mb-1.5">Neutralized Vectors</p>
+                        <h2 className="text-4xl font-bold text-white tracking-tight tabular-nums">{stats?.fakeScans || 0}</h2>
                     </div>
                 </div>
-                <div className="bg-[#facc15] border-[4px] border-black shadow-[10px_10px_0px_0px_rgba(0,0,0,1)] p-10 flex items-center gap-10 hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[14px_14px_0px_0px_rgba(0,0,0,1)] transition-all">
-                    <div className="p-8 border-[4px] border-black bg-white shadow-[6px_6px_0px_0px_black] text-black">
-                        <AlertTriangle size={48} strokeWidth={3} />
+                <div className="premium-card p-8 rounded-[2rem] flex items-center gap-8 group">
+                    <div className="p-6 rounded-2xl bg-indigo-500/10 text-indigo-400 ring-1 ring-white/5 group-hover:scale-110 transition-transform">
+                        <AlertTriangle size={40} />
                     </div>
                     <div>
-                        <p className="text-black text-[10px] font-black uppercase tracking-[0.3em] mb-2">Verification Flux</p>
-                        <h2 className="text-5xl font-black text-black tracking-tighter uppercase">{stats?.totalScans || 0}</h2>
+                        <p className="text-slate-500 text-[10px] font-bold uppercase tracking-widest mb-1.5">Verification Flux</p>
+                        <h2 className="text-4xl font-bold text-white tracking-tight tabular-nums">{stats?.totalScans || 0}</h2>
                     </div>
                 </div>
             </div>
