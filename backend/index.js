@@ -22,3 +22,6 @@ if (fs.existsSync(entryPoint)) {
     console.error('Did you run "npm run build" inside the backend folder?');
     process.exit(1);
 }
+
+
+postgresql://postgres:9ASObz1sy74H8YQC@db.pcidgorkgklpttjzoyge.supabase.co:5432/postgres
