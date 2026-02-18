@@ -26,7 +26,7 @@ const register = async (req, res) => {
             },
         });
         const token = jsonwebtoken_1.default.sign({ id: user.id, role: user.role, companyId: user.companyId }, JWT_SECRET, { expiresIn: '24h' });
-        res.status(201).json({ token, user: { id: user.id, email: user.email, name: user.name, role: user.role } });
+        res.status(201).json({ token, user: { id: user.id, email: user.email, name: user.name, role: user.role, companyId: user.companyId } });
     }
     catch (error) {
         res.status(500).json({ message: error.message });
@@ -45,7 +45,7 @@ const login = async (req, res) => {
             return res.status(400).json({ message: 'Invalid credentials' });
         }
         const token = jsonwebtoken_1.default.sign({ id: user.id, role: user.role, companyId: user.companyId }, JWT_SECRET, { expiresIn: '24h' });
-        res.json({ token, user: { id: user.id, email: user.email, name: user.name, role: user.role } });
+        res.json({ token, user: { id: user.id, email: user.email, name: user.name, role: user.role, companyId: user.companyId } });
     }
     catch (error) {
         res.status(500).json({ message: error.message });
